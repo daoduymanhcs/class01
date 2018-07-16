@@ -11,6 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'UserController@index')->name('index')->middleware('login');
+
+Route::get('login', 'UserController@login')->name('login');
+Route::post('/post-login', 'UserController@postLogin');
+Route::get('/logout', 'UserController@logout')->name('logout');
+Route::get('/edit/{id}', 'UserController@edit');
+
+Route::post('/update', 'UserController@update');
+
+Route::get('/form', function () {
+	return view('form');
 });
+
+Route::post('post-form', 'FormController@postForm');
